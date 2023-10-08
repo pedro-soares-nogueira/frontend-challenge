@@ -11,7 +11,7 @@ export type ReducerAction<T, P> = {
 export type FileContextState = {
   isLoading: boolean;
   file: File | null;
-  fileList: File[]; // & {} You can add more information about the cgallenge inside this type
+  fileList: File[]; // & {} You can add more information about the challenge inside this type
 };
 
 export type FileAction = ReducerAction<
