@@ -3,9 +3,10 @@ import { SingleFileUploader } from "../components";
 
 function Upload(): ReactElement {
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-80px)]">
+    <>
+      <h1 className="text-2xl font-bold pt-5 text-green-800">Upload</h1>
       <SingleFileUploader />
-    </div>
+    </>
   )
 }
 

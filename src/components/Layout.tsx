@@ -34,7 +34,7 @@ function Layout(): ReactElement {
         </nav>
       </header>
 
-      <main className="p-6">
+      <main className="p-6 flex flex-col gap-8">
         <FileProvider>
           <Outlet />
         </FileProvider>

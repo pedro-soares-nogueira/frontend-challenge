@@ -17,8 +17,7 @@ function FileList(): ReactElement {
   // Remember to keep the fileList updated after upload a new file
 
     return (
-      <div className="flex flex-col gap-8">
-
+      <>
         <h1 className="text-2xl font-bold pt-5 text-green-800">File List</h1>
 
         <Table>
@@ -40,7 +39,7 @@ function FileList(): ReactElement {
             </TableRow>
           </TableBody>
         </Table>
-      </div>
+      </>
     )
 }
 
