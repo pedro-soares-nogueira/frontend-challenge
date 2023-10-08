@@ -16,7 +16,7 @@
   <h3 align="center">Kanastra's Boilerplate Frontend Challenge</h3>
 
   <p align="center">
-     Boilerplate for frontend Kanastra's challenge
+     This application is a boilerplate to make the frontend challenge more quickly.
     <br />
   </p>
 </p>
@@ -46,8 +46,6 @@
 ## About The Project
 
 ![image](https://github.com/Kanastra-Tech/frontend-challenge-boilerplate/assets/39869298/c6b0185b-89ec-4f59-85cc-779d30159ed6)
-
-This application is a boilerplate to make this frontend challenge more quickly.
 
 ### Built With
 
