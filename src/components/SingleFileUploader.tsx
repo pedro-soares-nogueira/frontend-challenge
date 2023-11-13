@@ -1,5 +1,5 @@
 import { useFileContext } from "@/context";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import {
   Table,
   TableBody,
@@ -8,9 +8,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import axios from "axios";
 
 const SingleFileUploader = () => {
-  const [arquive, setArquive] = useState<File>();
+  const [arquive, setArquive] = useState<File | null>(null);
   const [bytesAmount, setBytesAmount] = useState(arquive ? arquive.size : 0);
 
   const {
@@ -25,14 +26,37 @@ const SingleFileUploader = () => {
     if (fileElements && fileElements.length > 0) {
       const file = fileElements[0];
 
-      console.log(file.size);
       setArquive(file);
       setBytesAmount(file.size);
     }
   };
 
   const handleUpload = async () => {
-    // Do your upload logic here. Remember to use the FileContext
+    if (arquive) {
+      const formData = new FormData();
+      formData.append("file", arquive);
+
+      try {
+        const response = await axios.post(
+          "http://localhost:3333/upload",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+
+        if (response.status >= 200 && response.status < 300) {
+          console.log("Upload bem-sucedido. Resposta:", response.data);
+          setArquive(null);
+        }
+      } catch (error) {
+        console.error("Erro no upload:", error);
+      }
+    } else {
+      console.error("Nenhum arquivo selecionado");
+    }
   };
 
   const formatFileBytes = (bytes: number, decimals = 2) => {
@@ -45,13 +69,6 @@ const SingleFileUploader = () => {
 
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
   };
-
-  // const interval = setInterval(() => {
-  //   console.count();
-  //   const result = bytesAmount - 5e6;
-  //   setBytesAmount(result < 0 ? 0 : result);
-  //   if (bytesAmount === 0) clearInterval(interval);
-  // }, 50);
 
   return (
     <>
