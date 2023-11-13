@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -9,13 +9,27 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useFileContext } from "@/context";
+import axios from "axios";
 
 function FileList(): ReactElement {
+  const [data, setData] = useState<File[] | null>(null);
+
   const {
     state: { fileList },
   } = useFileContext();
 
-  // Remember to keep the fileList updated after upload a new file
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3333/documents");
+        setData(response.data.documents);
+      } catch (error) {
+        console.error("Ocorreu um erro ao buscar os dados:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="bg-white rounded-lg p-6 space-y-6">
@@ -31,12 +45,14 @@ function FileList(): ReactElement {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell className="font-medium">Pedro Soares</TableCell>
-              <TableCell>pedro@gmail.com</TableCell>
-              <TableCell>R$25.000,00</TableCell>
-              <TableCell className="text-right">99-99-9999</TableCell>
-            </TableRow>
+            {data?.map((item) => (
+              <TableRow key={item.debtID}>
+                <TableCell className="font-medium">{item.name}</TableCell>
+                <TableCell>{item.email}</TableCell>
+                <TableCell>R${item.debtAmount}</TableCell>
+                <TableCell className="text-right">{item.debtDueDate}</TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </div>
