@@ -5,36 +5,55 @@ import { NavLink, Outlet } from "react-router-dom";
 function Layout(): ReactElement {
   return (
     <>
-      <header className="max-h-20 w-full flex-1 bg-slate-200 py-4 px-6">
-        <nav>
-          <ul className="flex justify-center items-center gap-4">
+      <nav className="py-4 px-6 bg-white">
+        <header className="container w-full m-auto flex items-center justify-between">
+          <h2 className="font-bold text-2xl">Pedro Soares</h2>
+          <ul className="flex justify-end items-center gap-4">
             <li className="list-none">
-              <NavLink
-                to="/"
-                className="no-underline"
-              >
+              <NavLink to="/" className="no-underline">
                 {({ isActive }) => (
-                  <div className={`py-2 px-4 rounded-lg ${isActive && "bg-green-50"} hover:bg-slate-300 transition-all`}>
-                    <span className={isActive ? "font-semibold text-green-700" : "text-slate-700"}>File List</span>
+                  <div
+                    className={`py-2 px-4 rounded-lg ${
+                      isActive && "bg-gray-200"
+                    } hover:bg-slate-300 transition-all`}
+                  >
+                    <span
+                      className={
+                        isActive
+                          ? "font-semibold text-gray-700"
+                          : "text-slate-700"
+                      }
+                    >
+                      File List
+                    </span>
                   </div>
                 )}
               </NavLink>
             </li>
-            <NavLink
-              to="/upload"
-              className="no-underline"
-            >
+            <NavLink to="/upload" className="no-underline">
               {({ isActive }) => (
-                <div className={`py-2 px-4 rounded-lg ${isActive && "bg-green-50"} hover:bg-slate-300 transition-all`}>
-                  <span className={isActive ? "font-semibold text-green-700" : "text-slate-700"}>Upload</span>
+                <div
+                  className={`py-2 px-4 rounded-lg ${
+                    isActive && "bg-gray-200"
+                  } hover:bg-slate-300 transition-all`}
+                >
+                  <span
+                    className={
+                      isActive
+                        ? "font-semibold text-gray-700"
+                        : "text-slate-700"
+                    }
+                  >
+                    Upload
+                  </span>
                 </div>
               )}
             </NavLink>
           </ul>
-        </nav>
-      </header>
+        </header>
+      </nav>
 
-      <main className="p-6 flex flex-col gap-8">
+      <main className="p-6 flex flex-col gap-8 container w-full m-auto ">
         <FileProvider>
           <Outlet />
         </FileProvider>
