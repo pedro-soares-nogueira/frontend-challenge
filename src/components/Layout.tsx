@@ -7,7 +7,7 @@ function Layout(): ReactElement {
     <>
       <nav className="py-4 px-6 bg-white">
         <header className="container w-full m-auto flex items-center justify-between">
-          <h2 className="font-bold text-2xl">Pedro Soares</h2>
+          <h1 className="font-bold text-2xl">Pedro Soares</h1>
           <ul className="flex justify-end items-center gap-4">
             <li className="list-none">
               <NavLink to="/" className="no-underline">

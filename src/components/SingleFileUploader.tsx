@@ -3,7 +3,6 @@ import { ChangeEvent } from "react";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -76,33 +75,49 @@ const SingleFileUploader = () => {
       {file && (
         <section className="bg-white p-6 rounded-lg space-y-4">
           <h2 className="text-xl font-bold">File details:</h2>
-
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="">Name</TableHead>
-                <TableHead>Type</TableHead>
-                <TableHead>Size</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell className="font-medium">{file.name}</TableCell>
-                <TableCell>{file.type}</TableCell>
-                <TableCell>{file.size} bytes</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
+          <div className="border border-gray-200 rounded-lg">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="">Name</TableHead>
+                  <TableHead>Type</TableHead>
+                  <TableHead>Size</TableHead>
+                  <TableHead>#</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow className="hover:bg-white">
+                  <TableCell className="font-medium">{file.name}</TableCell>
+                  <TableCell>{file.type}</TableCell>
+                  <TableCell>{file.size} bytes</TableCell>
+                  <TableCell className="max-w-[1rem]">
+                    {file && (
+                      <button
+                        className="rounded-lg hover:bg-green-200 transition-all bg-green-100 text-green-800 p-4 border-none font-semibold w-full flex items-center justify-center"
+                        onClick={handleUpload}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-6 h-6 text-green-800"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
+                          />
+                        </svg>
+                      </button>
+                    )}
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
         </section>
-      )}
-
-      {file && (
-        <button
-          className="rounded-lg bg-green-800 text-white px-4 py-2 border-none font-semibold"
-          onClick={handleUpload}
-        >
-          Upload the file
-        </button>
       )}
     </>
   );
