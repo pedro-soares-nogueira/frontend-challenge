@@ -168,10 +168,41 @@ const SingleFileUploader = () => {
           </div>
         )}
 
-        {!arquive && (
+        {!arquive && Object.keys(file).length === 0 && (
           <p className="text-base text-red-500 ">
             Your table will be available here
           </p>
+        )}
+
+        {!arquive && Object.keys(file).length !== 0 && (
+          <>
+            <p className="text-base text-green-700 ">
+              Your data has been updated
+            </p>
+
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="">name</TableHead>
+                  <TableHead>email</TableHead>
+                  <TableHead>debtAmount</TableHead>
+                  <TableHead className="text-right">debtDueDate</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {Object.entries(file)?.map(([key, item]) => (
+                  <TableRow key={item.debtID}>
+                    <TableCell className="font-medium">{item.name}</TableCell>
+                    <TableCell>{item.email}</TableCell>
+                    <TableCell>R${item.debtAmount}</TableCell>
+                    <TableCell className="text-right">
+                      {item.debtDueDate}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </>
         )}
       </section>
     </>

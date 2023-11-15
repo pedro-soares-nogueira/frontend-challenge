@@ -42,7 +42,7 @@ function FileList(): ReactElement {
     <div className="bg-white rounded-lg p-6 space-y-6">
       <h2 className="text-xl font-bold">File List</h2>
       <div className="border border-gray-200 rounded-lg">
-        {fileList.length !== 0 && (
+        {fileList?.length !== 0 && (
           <Table>
             <TableHeader>
               <TableRow>
@@ -67,7 +67,7 @@ function FileList(): ReactElement {
           </Table>
         )}
 
-        {fileList.length === 0 && (
+        {fileList?.length === 0 && (
           <div className="flex items-center justify-center flex-col gap-6 md:p-10 p-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
