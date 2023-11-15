@@ -23,20 +23,26 @@ const FileContext = createContext<{
 
 const FileReducer = (
   state: FileContextState,
-  action: FileAction,
+  action: FileAction
 ): FileContextState => {
   switch (action.type) {
     case FileActionType.SET_UPLOAD_FILE: {
-      // Create the action return
-      break;
+      return {
+        ...state,
+        file: action.payload,
+      };
     }
     case FileActionType.SET_FILE_LIST: {
-      // Create the action return
-      break;
+      return {
+        ...state,
+        fileList: action.payload,
+      };
     }
     case FileActionType.SET_IS_LOADING: {
-      // Create the action return
-      break;
+      return {
+        ...state,
+        isLoading: action.payload ? action.payload : false,
+      };
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
@@ -47,7 +53,7 @@ const FileReducer = (
 const FileProvider = ({ children }: FileProviderProps) => {
   const [state, dispatch] = useReducer(
     FileReducer,
-    FileContextInitialValues as FileContextState,
+    FileContextInitialValues as FileContextState
   );
 
   return (

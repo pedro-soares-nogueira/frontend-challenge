@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import axios from "axios";
+import { FileActionType } from "@/constants";
 
 const SingleFileUploader = () => {
   const [arquive, setArquive] = useState<File | null>(null);
@@ -16,6 +17,7 @@ const SingleFileUploader = () => {
 
   const {
     state: { file },
+    dispatch,
   } = useFileContext();
 
   console.log(file);
@@ -47,7 +49,14 @@ const SingleFileUploader = () => {
           }
         );
 
+        const documents = response.data.documents;
+
         if (response.status >= 200 && response.status < 300) {
+          dispatch({
+            type: FileActionType.SET_UPLOAD_FILE,
+            payload: documents,
+          });
+
           console.log("Upload bem-sucedido. Resposta:", response.data);
           setArquive(null);
         }

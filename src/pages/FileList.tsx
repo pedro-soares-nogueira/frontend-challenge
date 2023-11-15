@@ -1,8 +1,7 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect } from "react";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -10,26 +9,33 @@ import {
 } from "@/components/ui/table";
 import { useFileContext } from "@/context";
 import axios from "axios";
+import { FileActionType } from "@/constants";
 
 function FileList(): ReactElement {
-  const [data, setData] = useState<File[] | null>(null);
-
   const {
     state: { fileList },
+    dispatch,
   } = useFileContext();
+
+  console.log(fileList);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:3333/documents");
-        setData(response.data.documents);
+        const documents = response.data.documents;
+
+        dispatch({
+          type: FileActionType.SET_FILE_LIST,
+          payload: documents,
+        });
       } catch (error) {
         console.error("Ocorreu um erro ao buscar os dados:", error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="bg-white rounded-lg p-6 space-y-6">
@@ -45,7 +51,7 @@ function FileList(): ReactElement {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data?.map((item) => (
+            {fileList?.map((item) => (
               <TableRow key={item.debtID}>
                 <TableCell className="font-medium">{item.name}</TableCell>
                 <TableCell>{item.email}</TableCell>
